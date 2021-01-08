@@ -16,7 +16,6 @@ def get_answers(input_question):
     for sentence in word_segmentation([input_question]):
         for word in sentence:
             if word in inverted_index.keys():
-                print('Ok: ' + str(word))
                 index_list += inverted_index[word]
     # 对匹配的索引进行去重
     index_list = list(set(index_list))
@@ -31,4 +30,4 @@ def get_answers(input_question):
         print(question_list[index], answer_list[index])
 
 
-get_answers('''Who predicted that Beyoncé would become the highest paid black entertainer?''')
+get_answers('''In which decade did Beyonce become famous''')

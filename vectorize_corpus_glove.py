@@ -17,7 +17,7 @@ preprocessed_question_list = pickle.load(open('model/preprocessed_question_list.
 #     pickle.dump(embeddings, fw)
 
 # 导入GloVe中的词头
-glove_words = pickle.load(open('model/glove_embeddings.pkl', 'rb'))
+glove_words = pickle.load(open('model/glove_words.pkl', 'rb'))
 
 # 导入GloVe矩阵
 embeddings = pickle.load(open('model/glove_embeddings.pkl', 'rb'))

@@ -79,10 +79,8 @@ def preprocessing_corpus(input_list, low_freq_words=None):
             # 排除停用词和低频词后写入处理后的句子
             if word not in stop_words and word not in low_freq_words:
                 preprocessed_sentence += word + ' '
-
-            # 删除多余空格
-            preprocessed_sentence = preprocessed_sentence.strip()
-        preprocessed_corpus.append(preprocessed_sentence)
+        # 删除多余空格，并存入结果
+        preprocessed_corpus.append(preprocessed_sentence.strip())
     return preprocessed_corpus
 
 
