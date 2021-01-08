@@ -8,13 +8,16 @@ low_freq_words = low_freq_words_construction(words_freq_dict)
 # 构建倒排索引表
 inverted_index = {}
 for word, freq in words_freq_dict.items():
-    if 100 < freq < 1000:  # 将出现次数大于100小于1000的词语作为索引
+    # 将出现次数大于100小于1000的中频词作为索引
+    if 100 < freq < 1000:
         inverted_index[word] = []
 
 for index, segmented_sentence in enumerate(segmented_question_list):
     for word in segmented_sentence:
-        if word in inverted_index.keys():  # 若单词已经在倒排表中
-            inverted_index[word].append(index)  # 将句子的索引值写入倒排表中
+        # 若单词已经在倒排表中
+        if word in inverted_index.keys():
+            # 将句子的索引值写入倒排表中
+            inverted_index[word].append(index)
 
 with open('model/inverted_index.pkl', 'wb') as fw:
     pickle.dump(inverted_index, fw)

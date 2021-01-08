@@ -1,29 +1,37 @@
 import json
 import string
 import numpy as np
-import pickle
 from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 
 
 # 读入语料库方法
 def read_corpus():
-    question_list = []  # 预创建两个空列表
+    # 预创建两个空列表
+    question_list = []
     answer_list = []
     with open('data/train-v2.0.json') as f:
-        data_array = json.load(f)['data']  # 读入jsonString，并赋值首个data项给data_array
-        for data in data_array:  # 遍历data_array
-            paragraphs = data['paragraphs']  # 赋值paragraphs项给paragraphs
-            for paragraph in paragraphs:  # 遍历paragraphs
-                qas = paragraph['qas']  # 赋值qas项给qas
-                for qa in qas:  # 遍历qas
-                    question_list.append(qa['question'])  # 先提取问题到问题列表
-                    if 'plausible_answers' in qa:  # 对于答案，有两种情况，一种为plausible_answers
+        # 读入jsonString，并赋值首个data项给data_array
+        data_array = json.load(f)['data']
+        # 遍历data_array
+        for data in data_array:
+            # 赋值paragraphs项给paragraphs
+            paragraphs = data['paragraphs']
+            # 遍历paragraphs
+            for paragraph in paragraphs:
+                # 赋值qas项给qas
+                qas = paragraph['qas']
+                # 遍历qas
+                for qa in qas:
+                    # 先提取问题到问题列表
+                    question_list.append(qa['question'])
+                    # 对于答案，有两种情况，一种为plausible_answers
+                    if 'plausible_answers' in qa:
                         answer_list.append(qa['plausible_answers'][0]['text'])
                     else:  # 另一种为answers
                         answer_list.append(qa['answers'][0]['text'])
-
-    assert len(question_list) == len(answer_list)  # 确保长度一样
+    # 确保问题列表与答案列表的长度一样
+    assert len(question_list) == len(answer_list)
     return question_list, answer_list
 
 
@@ -43,6 +51,7 @@ def word_segmentation(sentences):
 def low_freq_words_construction(words_freq_dict):
     low_freq_words = []
     for word, freq in words_freq_dict.items():
+        # 将词频低于2的词归为低频词
         if freq < 2:
             low_freq_words.append(word.lower())
     return low_freq_words
