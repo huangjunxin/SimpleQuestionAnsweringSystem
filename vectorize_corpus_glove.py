@@ -25,10 +25,10 @@ embeddings = pickle.load(open('model/glove_embeddings.pkl', 'rb'))
 # 初始化向量化后的问题列表
 vectorized_question_list = []
 for preprocessed_sentence in preprocessed_question_list:
-    vectorized_sentence = get_sentence_vector(preprocessed_sentence, glove_words, embeddings)
+    vectorized_sentence = get_sentence_vector(preprocessed_sentence, glove_words, embeddings, 100)
     vectorized_question_list.append(vectorized_sentence)
 vectorized_question_list = np.asarray(vectorized_question_list)
 
 # 保存向量化后的问题列表结果到文件
-with open('model/vectorized_question_list(glove).pkl', 'wb') as fw:
+with open('model/vectorized_question_list_glove.pkl', 'wb') as fw:
     pickle.dump(vectorized_question_list, fw)

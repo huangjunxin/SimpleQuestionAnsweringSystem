@@ -104,18 +104,33 @@ def get_glove_matrix():
             glove_embeddings.append(row[1:])
 
     embeddings = np.asarray(glove_embeddings)
-    # 返回GloVe中的词头、矩阵化后的Glove
+    # 返回GloVe中的词头、矩阵化后的GloVe
     return glove_words, embeddings
 
 
 # 通过GloVe模型和均值池化方法获取句向量
-def get_sentence_vector(sentence, glove_words, embeddings):
-    vectorized_sentence = []
-
+def get_sentence_vector(sentence, glove_words, embeddings, dimension):
+    # 初始化单词索引列表
+    words_index = []
+    # 对已预处理的句子按空格分隔词语
     segmented_sentence = sentence.split(' ')
+    # 初始化单词计数器
+    words_number = 0
     for word in segmented_sentence:
+        # 若句子中的单词在GloVe词头中出现
         if word in glove_words:
-            index = glove_words.index(word)  # 取出对应单词的索引
-            vectorized_sentence.append(index)
-
-    return embeddings[vectorized_sentence].astype(float).sum() / len(segmented_sentence)
+            # 单词计数器加一
+            words_number += 1
+            # 取出对应单词的索引
+            index = glove_words.index(word)
+            # 将当前单词的索引加入单词索引列表
+            words_index.append(index)
+    # 初始化句向量结果
+    sentence_vector = np.zeros((dimension, ), dtype='float')
+    # 根据单词索引列表提取对应的词向量列表，并进行遍历
+    for embedding in embeddings[words_index]:
+        sentence_vector += embedding.astype(float)
+    # 若单词数大于0（避免除以零现象）
+    if words_number > 0:
+        sentence_vector = sentence_vector / words_number
+    return sentence_vector

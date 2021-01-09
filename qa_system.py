@@ -10,7 +10,7 @@ vectorizer = pickle.load(open('model/vectorizer.pkl', 'rb'))
 inverted_index = pickle.load(open('model/inverted_index.pkl', 'rb'))
 
 
-def get_answers(input_question):
+def get_answers_optimized(input_question):
     # 对输入的问题进行倒排表索引的匹配
     index_list = []
     for sentence in word_segmentation([input_question]):
@@ -30,4 +30,13 @@ def get_answers(input_question):
         print(question_list[index], answer_list[index])
 
 
-get_answers('''In which decade did Beyonce become famous''')
+get_answers_optimized('''In which decade did Beyonce become famous''')
+print('----------')
+get_answers_optimized('''What areas did Beyonce compete in when she was growing up?''')
+print('----------')
+get_answers_optimized('''What was the latest version of iTunes as of mid-2015?''')
+print('----------')
+get_answers_optimized('''What products were exported along with indigo from the Lowcountry?''')
+print('----------')
+get_answers_optimized('''What supply port was opened late in 1944?''')
+
