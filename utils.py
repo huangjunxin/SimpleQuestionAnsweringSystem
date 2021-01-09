@@ -134,3 +134,36 @@ def get_sentence_vector(sentence, glove_words, embeddings, dimension):
     if words_number > 0:
         sentence_vector = sentence_vector / words_number
     return sentence_vector
+
+
+# 构建倒排索引表
+def get_inverted_index(words_freq_dict, preprocessed_question_list):
+    # 初始化倒排表结果
+    inverted_index = {}
+    for word, freq in words_freq_dict.items():
+        # 将出现次数大于100小于1000的中频词作为索引
+        if 100 < freq < 1000:
+            inverted_index[word] = []
+    # 遍历已预处理的问题列表，插入倒排表的索引
+    for index, sentence in enumerate(preprocessed_question_list):
+        for word in sentence.split(' '):
+            # 若单词已经在倒排表中
+            if word in inverted_index.keys():
+                # 将句子的索引值写入倒排表中
+                inverted_index[word].append(index)
+    return inverted_index
+
+
+# 构建倒排索引表
+def get_full_inverted_index(preprocessed_question_list):
+    # 初始化倒排表结果
+    inverted_index = {}
+    for index, sentence in enumerate(preprocessed_question_list):
+        for word in sentence.split(' '):
+            # 若单词已经在倒排表中
+            if word in inverted_index.keys():
+                # 将句子的索引值写入倒排表中
+                inverted_index[word].append(index)
+            else:
+                inverted_index[word] = [index]
+    return inverted_index

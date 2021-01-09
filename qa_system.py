@@ -1,9 +1,16 @@
-from qa_function import get_answers, get_answers_glove, get_answers_optimized, get_answers_glove_optimized
+from qa_function import get_answers, get_answers_glove, get_answers_optimized, get_answers_glove_optimized, inverted_index
+from utils import question_list
 
-get_answers('''In which decade did Beyonce become famous''')
-print('----------')
+# print(inverted_index)
 
-get_answers_optimized('''In which decade did Beyonce become famous''')
+# res_list = get_answers('''Whose grave isn't the only one in the abbey on which it is encouraged to walk?''')
+# for index in res_list:
+#     print(question_list[index])
+# print('----------')
+
+res_list = get_answers_optimized('''In which decade did Beyonce become famous''')
+for index in res_list:
+    print(question_list[index])
 print('----------')
 # get_answers_optimized('''What areas did Beyonce compete in when she was growing up?''')
 # print('----------')
@@ -13,10 +20,14 @@ print('----------')
 # print('----------')
 # get_answers_optimized('''What supply port was opened late in 1944?''')
 
-get_answers_glove('''In which decade did Beyonce become famous''')
-print('----------')
-
-get_answers_glove_optimized('''In which decade did Beyonce become famous''')
+# res_list = get_answers_glove('''Whose grave isn't the only one in the abbey on which it is encouraged to walk?''')
+# for index in res_list:
+#     print(question_list[index])
+# print('----------')
+#
+# res_list = get_answers_glove_optimized('''Whose grave isn't the only one in the abbey on which it is encouraged to walk?''')
+# for index in res_list:
+#     print(question_list[index])
 # print('----------')
 # get_answers_glove_optimized('''What areas did Beyonce compete in when she was growing up?''')
 # print('----------')
