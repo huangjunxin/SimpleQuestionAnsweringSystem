@@ -23,12 +23,12 @@ def single_performance_test(question_index, test_get_answers):
 
 
 # 设置测试次数
-test_times = 5
+test_times = 1000
 # 初始化函数名
 func_name = ['get_answers', 'get_answers_glove', 'get_answers_optimized', 'get_answers_glove_optimized']
-# 初始化命中计数，0：get_answers；1：get_answers_glove；2：get_answers_optimized；3：get_answers_glove_optimized
+# 初始化命中计数，索引0-3分别对应上方的函数名
 is_correct = [0, 0, 0, 0]
-# 初始化时间统计，0：get_answers；1：get_answers_glove；2：get_answers_optimized；3：get_answers_glove_optimized
+# 初始化时间统计，索引0-3分别对应上方的函数名
 time_consuming = [0, 0, 0, 0]
 for i in range(test_times):
     # print(len(question_list)) 130319
