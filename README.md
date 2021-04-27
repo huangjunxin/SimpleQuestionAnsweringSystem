@@ -2,7 +2,7 @@
 
 Training and Implementation of a Simple Question Answering System Based on Bag-of-words and GloVe Model.
 
-In fact, this is the final project of my Python programming course in my school
+*This is my final assignment of the course Python programming.*
 
 ## ABSTRACT
 
